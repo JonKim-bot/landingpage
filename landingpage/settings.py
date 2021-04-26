@@ -24,8 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '&zb^g%k8#cef+6rg()*d#zj%to5n4o=bp_(r8gh+@2i!vw$51a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -41,6 +41,8 @@ MEDIA_URL = '/media/'
 INSTALLED_APPS = [
     # 'polls.apps.PollsConfig',
     'blog.apps.BlogConfig',
+    'about.apps.AboutConfig',
+
     'home.apps.HomeConfig',
     # 'users.apps.UsersConfig',
     'crispy_forms',
