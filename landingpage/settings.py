@@ -102,14 +102,14 @@ DATABASES = {
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.mysql',
         'NAME': BASE_DIR / 'db.mysql',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'NAME': 'django_test',
-        'PASSWORD': 'password',
-        # 'HOST' : '194.59.164.64',
-        # 'USER': 'u615769276_django',
-        # 'NAME': 'u615769276_django',
-        # 'PASSWORD' : 'Walaodiam123=',
+        # 'HOST': 'localhost',
+        # 'USER': 'root',
+        # 'NAME': 'django_test',
+        # 'PASSWORD': 'password',
+        'HOST' : '194.59.164.64',
+        'USER': 'u615769276_django',
+        'NAME': 'u615769276_django',
+        'PASSWORD' : 'Walaodiam123=',
 
 
     }
