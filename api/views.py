@@ -63,6 +63,8 @@ def home_list(request):
     #         serializer.save()
     #         return JsonResponse(serializer.data, status=201)
     #     return JsonResponse(serializer.errors, status=400)
+@api_view(['GET','POST'])
+
 @csrf_exempt
 def home_detail(request, pk):
     """
@@ -71,13 +73,15 @@ def home_detail(request, pk):
     try:
         home = Home.objects.get(pk=pk)
     except Home.DoesNotExist:
-        return HttpResponse(status=404)
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == 'GET':
-        serializer = HomeSerializer(home)
-        return JsonResponse(serializer.data)
+    if request.method == 'GET' or request.method == 'POST' :
+        serializer = HomeSerializer(home, many=False)
+        return Response(serializer.data)
 
-    elif request.method == 'PUT':
+        # return JsonResponse(serializer.data)
+
+    elif request.method == 'PUT' :
         data = JSONParser().parse(request)
         serializer = HomeSerializer(home, data=data)
         if serializer.is_valid():
