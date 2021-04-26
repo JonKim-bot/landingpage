@@ -8,6 +8,7 @@ import json
 from home.models import Home
 from about.models import About
 from home.serializers import HomeSerializer
+from rest_framework.response import Response
 # serializer = HomeSerializer()
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -35,48 +36,56 @@ from django.core import serializers
 #         'title' : userfilter,
 #     }
 #     return render(request, 'blog/home.html', context)
-
+@api_view(['GET',])
 @csrf_exempt
-def snippet_list(request):
+def home_list(request):
     """
-    List all code home, or create a new snippet.
-    """
-    if request.method == 'GET':
-        home = Home.objects.all()
-        serializer = HomeSerializer(home, many=True)
-        return JsonResponse(serializer.data, safe=False)
-
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = HomeSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
-@csrf_exempt
-def snippet_detail(request, pk):
-    """
-    Retrieve, update or delete a code snippet.
+    List all code home, or create a new home.
     """
     try:
-        snippet = Home.objects.get(pk=pk)
+        home = Home.objects.all()
+
+    except Home.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    # if request.
+    if request.method == 'GET':
+        # home = Home.objects.all()
+        serializer = HomeSerializer(home, many=True)
+        return Response(serializer.data, safe=False)
+
+        # return JsonResponse(serializer.data, safe=False)
+
+    # elif request.method == 'POST':
+    #     data = JSONParser().parse(request)
+    #     serializer = HomeSerializer(data=data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return JsonResponse(serializer.data, status=201)
+    #     return JsonResponse(serializer.errors, status=400)
+@csrf_exempt
+def home_detail(request, pk):
+    """
+    Retrieve, update or delete a code home.
+    """
+    try:
+        home = Home.objects.get(pk=pk)
     except Home.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = HomeSerializer(snippet)
+        serializer = HomeSerializer(home)
         return JsonResponse(serializer.data)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = HomeSerializer(snippet, data=data)
+        serializer = HomeSerializer(home, data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
-        snippet.delete()
+        home.delete()
         return HttpResponse(status=204)
 def get_home(request):
     # return HttpResponse(repr(serializer))
