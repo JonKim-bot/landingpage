@@ -10,6 +10,8 @@ from about.models import About
 from home.serializers import HomeSerializer
 from rest_framework.response import Response
 # serializer = HomeSerializer()
+from rest_framework.decorators import api_view, renderer_classes
+
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
@@ -36,7 +38,7 @@ from django.core import serializers
 #         'title' : userfilter,
 #     }
 #     return render(request, 'blog/home.html', context)
-@api_view(['GET',])
+@api_view(['GET','POST'])
 @csrf_exempt
 def home_list(request):
     """
@@ -48,13 +50,12 @@ def home_list(request):
     except Home.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     # if request.
-    if request.method == 'GET':
+    if request.method == 'GET' or request.method == 'POST':
         # home = Home.objects.all()
         serializer = HomeSerializer(home, many=True)
-        return Response(serializer.data, safe=False)
+        return Response(serializer.data)
 
         # return JsonResponse(serializer.data, safe=False)
-
     # elif request.method == 'POST':
     #     data = JSONParser().parse(request)
     #     serializer = HomeSerializer(data=data)
