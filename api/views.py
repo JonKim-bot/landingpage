@@ -68,9 +68,25 @@ def get_home(request):
     #     'title' : userfilter,
     # }
     # return render(request, 'blog/home.html', context)
-    return HttpResponse(data)
+    # return HttpResponse(data)
 
 def about(request):
-    return render(request, 'blog/about.html')
+    # if request.method == 'POST':
+
+    about = About.objects.all()
+    # # user_post = user.post_set()
+    # user_post = user.post_set.all()
+    # Postquery = Post.objects.raw('SELECT * FROM blog_post LIMIT 2')
+    data = serializers.serialize("json", about)
+        # data = json.loads(data)
+
+        # data= type(data)
+
+
+        # cars = ["Ford", "Volvo", "BMW"]
+        # cars = cars[0]
+    return HttpResponse(data)
+
+    # return render(request, 'blog/about.html')
 
     # return HttpResponse("about")
