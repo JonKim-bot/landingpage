@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     # 'users.apps.UsersConfig',
     'crispy_forms',
     'django_summernote',
+    'rest_framework',
+
     # 'firstdjango.apps.FirstdjangoConfig',
     'django.contrib.admin',
     'django.contrib.auth',
