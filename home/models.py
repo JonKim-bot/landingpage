@@ -15,3 +15,14 @@ class Home(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     # author = models.ForeignKey(User, on_delete=models.CASCADE)
     
+class Landingform(models.Model):
+    landing_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    email = models.CharField(max_length=255)
+    message = models.TextField(blank=True, null=True)
+    created_date = models.DateTimeField()
+    deleted = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'landingform'
