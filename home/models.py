@@ -17,6 +17,8 @@ class Home(models.Model):
     # content_two = models.TextField()
     list_content = models.TextField(default='')
     detail_word = models.TextField(default='')
+    last_section_title = models.TextField(default='')
+
     imageone = models.ImageField(default='default.jpg', upload_to='profile_pics')
     imagetwo = models.ImageField(default='default.jpg', upload_to='profile_pics')
     imagethree = models.ImageField(default='default.jpg', upload_to='profile_pics')
