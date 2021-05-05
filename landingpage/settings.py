@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # 'polls.apps.PollsConfig',
     'blog.apps.BlogConfig',
     'about.apps.AboutConfig',
+    'corsheaders',
 
     'home.apps.HomeConfig',
     # 'users.apps.UsersConfig',
@@ -69,6 +70,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -96,6 +98,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'landingpage.wsgi.application'
 
+CORS_ORIGIN_ALLOW_ALL = True # If this is used then `CORS_ORIGIN_WHITELIST` will not have any effect
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

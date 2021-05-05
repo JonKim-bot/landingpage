@@ -47,7 +47,7 @@ def home_list(request):
     try:
         home = Home.objects.all()
 
-    except Home.DoesNotExist:
+    except Home.DoesNotExist: 
         return Response(status=status.HTTP_404_NOT_FOUND)
     # if request.
     if request.method == 'GET' or request.method == 'POST':
