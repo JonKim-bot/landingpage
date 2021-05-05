@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 import json
 from home.models import Home
 from about.models import About
+
 from home.serializers import HomeSerializer
 from rest_framework.response import Response
 # serializer = HomeSerializer()
