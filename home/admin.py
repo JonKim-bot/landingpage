@@ -8,7 +8,8 @@ from .models import Home
 from .models import Landingform
 
 class HomeAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
-    summernote_fields = '__all__'
+    # summernote_fields = '__all__'
+    summernote_fields = ('about_description',)
 
 
 class LandingformAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
