@@ -6,6 +6,7 @@ from django.urls import reverse
 
 class About(models.Model):
     title = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
     # subtitle = models.CharField()
     content = models.TextField()
     content_two = models.TextField()
@@ -16,6 +17,7 @@ class About(models.Model):
     image2 = models.ImageField(default='default.jpg', upload_to='profile_pics')
     
     notable_client = models.TextField()
+
     consulatation_word = models.TextField()
     limited_discount = models.TextField()
     button_text = models.TextField()
