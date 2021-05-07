@@ -6,6 +6,8 @@ from blog.models import Post
 from django.contrib.auth.models import User
 import json
 from home.models import Home
+from home.models import Landingform
+
 from about.models import About
 
 from home.serializers import HomeSerializer
@@ -16,8 +18,11 @@ from rest_framework.decorators import api_view, renderer_classes
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from home.models import Home
+from home.serializers import LandingformSerializer
+
 from home.serializers import HomeSerializer
+from about.serializers import AboutSerializer
+
 from django.core import serializers
 
 
@@ -39,6 +44,47 @@ from django.core import serializers
 #         'title' : userfilter,
 #     }
 #     return render(request, 'blog/home.html', context)
+@api_view(['GET','POST'])
+@csrf_exempt
+def insert_form(request):
+    """
+    List all code home, or create a new home.
+    """
+
+    # if request.
+    if  request.method == 'POST' or request.method == "GET":
+  
+        serializer = LandingformSerializer(data=request.POST)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+@api_view(['GET','POST'])
+@csrf_exempt
+def about_list(request):
+    """
+    List all code home, or create a new home.
+    """
+    try:
+        about = About.objects.all()
+
+    except About.DoesNotExist: 
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    # if request.
+    if request.method == 'GET' or request.method == 'POST':
+        # home = Home.objects.all()
+        serializer = AboutSerializer(about, many=True)
+        return Response(serializer.data)
+
+        # return JsonResponse(serializer.data, safe=False)
+    # elif request.method == 'POST':
+    #     data = JSONParser().parse(request)
+    #     serializer = HomeSerializer(data=data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return JsonResponse(serializer.data, status=201)
+    #     return JsonResponse(serializer.errors, status=400)
 @api_view(['GET','POST'])
 @csrf_exempt
 def home_list(request):
@@ -135,23 +181,23 @@ def get_home(request):
     # return render(request, 'blog/home.html', context)
     # return HttpResponse(data)
 
-def about(request):
-    # if request.method == 'POST':
+# def about(request):
+#     # if request.method == 'POST':
 
-    about = About.objects.all()
-    # # user_post = user.post_set()
-    # user_post = user.post_set.all()
-    # Postquery = Post.objects.raw('SELECT * FROM blog_post LIMIT 2')
-    data = serializers.serialize("json", about)
-        # data = json.loads(data)
+#     about = About.objects.all()
+#     # # user_post = user.post_set()
+#     # user_post = user.post_set.all()
+#     # Postquery = Post.objects.raw('SELECT * FROM blog_post LIMIT 2')
+#     data = serializers.serialize("json", about)
+#         # data = json.loads(data)
 
-        # data= type(data)
+#         # data= type(data)
 
 
-        # cars = ["Ford", "Volvo", "BMW"]
-        # cars = cars[0]
-    return HttpResponse(data)
+#         # cars = ["Ford", "Volvo", "BMW"]
+#         # cars = cars[0]
+#     return HttpResponse(data)
 
-    # return render(request, 'blog/about.html')
+#     # return render(request, 'blog/about.html')
 
-    # return HttpResponse("about")
+#     # return HttpResponse("about")

@@ -30,8 +30,8 @@ class Landingform(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     email = models.CharField(max_length=255)
     message = models.TextField(blank=True, null=True)
-    created_date = models.DateTimeField()
-    deleted = models.IntegerField()
+    created_date = models.DateTimeField(blank=True, null=True)
+    deleted = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
