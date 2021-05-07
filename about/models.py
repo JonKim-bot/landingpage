@@ -6,7 +6,7 @@ from django.urls import reverse
 
 class About(models.Model):
     title = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
+    description = models.CharField(max_length=255,default="")
     # subtitle = models.CharField()
     content = models.TextField()
     content_two = models.TextField()

@@ -7,7 +7,7 @@ from django_summernote.admin import SummernoteModelAdmin
 from .models import About
 class AboutAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
     # summernote_fields = '__all__'
-    summernote_fields = ('description','content','content_two',)
+    summernote_fields = ('content_two',)
 
 
 admin.site.register(About,AboutAdmin)
