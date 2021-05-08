@@ -37,11 +37,11 @@ MEDIA_URL = '/media/'
 
 # Application definition
 EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.googlemail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'your_account@gmail.com'
-EMAIL_HOST_PASSWORD = 'your account’s password'
+EMAIL_HOST_USER = 'noreply.piegenemenu@gmail.com'
+EMAIL_HOST_PASSWORD = 'Password123='
 
 INSTALLED_APPS = [
     # 'polls.apps.PollsConfig',
@@ -170,3 +170,4 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'blog-home'
 LOGIN_URL = 'login'
+

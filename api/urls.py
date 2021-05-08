@@ -8,7 +8,6 @@ urlpatterns = [
     path('get_home/', views.get_home, name='get_home'),
     path('home/', views.home_list),
     path('insert_form/', views.insert_form),
-
     path('home/<int:pk>/', views.home_detail),
     
     # path('about/<int:pk>/', views.about_detail),

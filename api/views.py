@@ -22,11 +22,14 @@ from home.serializers import LandingformSerializer
 
 from home.serializers import HomeSerializer
 from about.serializers import AboutSerializer
+from django.core.mail import EmailMessage
+from django.templatetags.static import static
 
 from django.core import serializers
 from landingpage.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail
-
+from landingpage.settings import STATIC_ROOT
+import os
 
 # def home(request):
 #     userfirst = User.objects.all()
@@ -46,6 +49,41 @@ from django.core.mail import send_mail
 #         'title' : userfilter,
 #     }
 #     return render(request, 'blog/home.html', context)
+
+def send_email(receiver):
+    """
+    List all code home, or create a new home.
+    """
+
+    # if request.
+    subject = 'Free PDF copy (20 critical questions to ask website designer before paying them)'
+    message = '''
+Hi There,
+
+I am Kenneth. Here is your free copy of the 20 critical questions to ask website designer before paying them.
+
+Wishing you all the best for your first website!
+
+Regards,
+
+Kenneth'''
+    recepient = str("yongrou74@hotmail.com")
+    email = EmailMessage(
+        subject,
+        message,
+        EMAIL_HOST_USER,
+        [receiver], 
+        # reply_to=['another@example.com'],
+        # headers={'Message-ID': 'foo'},
+    )
+    pdf_file = os.path.join(STATIC_ROOT, '20_critical_questions.pdf')
+
+    email.attach_file(pdf_file)
+    email.send()
+        # send_mail(subject, 
+        #     message, EMAIL_HOST_USER, [recepient], fail_silently = False)
+          
+
 @api_view(['GET','POST'])
 @csrf_exempt
 def insert_form(request):
@@ -59,11 +97,7 @@ def insert_form(request):
         serializer = LandingformSerializer(data=request.POST)
         if serializer.is_valid():
             serializer.save()
-            subject = 'Welcome to DataFlair'
-            message = 'Hope you are enjoying your Django Tutorials'
-            recepient = str(serializer.data.email)
-            send_mail(subject, 
-                message, EMAIL_HOST_USER, [recepient], fail_silently = False)
+            send_email(request.POST.get('email'))
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
