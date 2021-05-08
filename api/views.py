@@ -24,6 +24,8 @@ from home.serializers import HomeSerializer
 from about.serializers import AboutSerializer
 
 from django.core import serializers
+from landingpage.settings import EMAIL_HOST_USER
+from django.core.mail import send_mail
 
 
 # def home(request):
@@ -57,6 +59,11 @@ def insert_form(request):
         serializer = LandingformSerializer(data=request.POST)
         if serializer.is_valid():
             serializer.save()
+            subject = 'Welcome to DataFlair'
+            message = 'Hope you are enjoying your Django Tutorials'
+            recepient = str(serializer.data.email)
+            send_mail(subject, 
+                message, EMAIL_HOST_USER, [recepient], fail_silently = False)
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
